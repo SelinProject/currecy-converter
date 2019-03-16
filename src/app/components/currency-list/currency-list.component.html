@@ -1,0 +1,9 @@
+<div *ngIf="currencyList; else errorMessage" id="currency-list">
+  <h2>Current prices</h2>
+  <div *ngFor="let currency of currencyList.rates"  [attr.name]="currency.name">
+    {{currency.name}}  {{currency.value | currency:currecySymbol : 'symbol' : '1.0-2' : globals.lang }}
+  </div>
+  <template #errorMessage id='currency-list-error-message'>
+    Something went wrong. Please try again.
+  </template>
+</div>

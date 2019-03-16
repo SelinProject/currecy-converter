@@ -1,0 +1,55 @@
+<div *ngIf="error" id="errorMessage">Something went wrong.</div>
+
+<div class="pt" *ngIf="!error && currencies">
+  <h1>
+    Currency Converter
+  </h1>
+  <div >
+      <form [formGroup]="currencyFrom" (submit)="convertAmount()">
+          <div class="pt">
+              <label for="base-currency" >Base Currency</label>
+              <select id="base-currency"
+                    [(ngModel)]="baseSelectedCurrency" 
+                    [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="getCurrencies($event)" required>
+                <option name="base-currency" *ngFor="let currency of currencies.rates" 
+                        [ngValue]="currency.name"  >
+                   {{ currency.name }} 
+                </option>
+              </select>
+          </div>
+          <div class="pt">
+              <label for="target-currency">Target Currency</label>
+              <select id="target-currency"
+                      [(ngModel)]="targetSelectedCurrency"
+                      [ngModelOptions]="{standalone: true}"
+                      (change)="isClicked = false" required>
+                  <option *ngFor="let currency of currencies.rates" [ngValue]="currency">
+                     {{ currency.name }} 
+                  </option>
+              </select>
+          </div>
+          <div>
+              <div class="pt">
+                  <label for="convert-amount" class="form-control__label">Amount</label>
+                  <input type="number" id="enter-amount" class="form-control" formControlName="amount"  >
+                </div>
+          </div>
+          <button id="amount" type="submit" class="form__btn mt" [disabled]=" (currencyFrom.pristine || currencyFrom.invalid) ">Convert Amount</button>
+          
+          <div class="pt" *ngIf="calculatedAmount && isClicked"> 
+
+            <span id="amount-value"> {{currencyFrom.controls.amount.value |  currency:baseSelectedCurrency : 'symbol' : '1.0-2' :  globals.lang }}</span>
+                =
+             <span id="calculated-amount-value">{{calculatedAmount |  currency:targetSelectedCurrency['name'] : 'symbol' : '1.0-2' :  globals.lang }}</span> 
+
+            </div>
+        </form>
+  </div>
+
+  <div class="pt" *ngIf="currencies && baseSelectedCurrency">
+      <app-currency-list  [currencyList]="currencies" [currecySymbol]="baseSelectedCurrency"></app-currency-list>
+  </div>
+
+</div>
+
