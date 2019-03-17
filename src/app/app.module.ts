@@ -8,11 +8,6 @@ import { CurrencyListComponent } from './components/currency-list/currency-list.
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Globals } from './shared/globals/Globals';
-
-//Register local values
-import localeEn from '@angular/common/locales/en';
-import localeTr from '@angular/common/locales/tr';
-import localeDe from '@angular/common/locales/de';
 import { registerLocaleData } from '@angular/common';
 
 //dynamicly get browser local and register 

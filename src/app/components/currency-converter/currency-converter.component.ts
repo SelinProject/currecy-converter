@@ -16,7 +16,7 @@ export class CurrencyConverterComponent implements OnInit {
 
   public currencies: CurrencyModel;
   public error: boolean;
-  public baseSelectedCurrency: any = 'EUR';
+  public baseSelectedCurrency: string = 'EUR';
   public targetSelectedCurrency: Rates;
   public amount: number;
   public calculatedAmount: number;
